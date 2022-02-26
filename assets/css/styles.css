@@ -617,6 +617,7 @@ body.light-theme{
 @media only screen and (min-width: 992px) {
   .mains .containers {
     width: 1000px; /* 78% */
+    height: 30rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
@@ -860,7 +861,7 @@ body.light-theme{
 /*=============== CONTACT ===============*/
 .contact__container{
   row-gap: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 0rem;
 }
 
 .contact__title{
@@ -869,17 +870,22 @@ body.light-theme{
   margin-bottom: 1.5rem;
 }
 .contact__info{
-  display: grid;
+  display: flex;
   gap: 1rem;
 }
 
 .contact__card{
-  width: 12rem;
+  width: 48%;
   background-color: var(--container-color);
   padding: 1rem;
   border-radius: .75rem;
   text-align: center;
   transition: all .8s ease-in;
+}
+@media screen and (min-width: 992px){
+  .contact__card{
+    width: 25rem;
+  }
 }
 
 .contact__card-icon{
@@ -961,7 +967,7 @@ body.light-theme{
 }
 
 .footer__container{
-  padding: 2rem 0 6rem;
+  padding: 0rem 0 6rem;
 }
 
 .footer__title,
@@ -1103,7 +1109,7 @@ body.light-theme{
   .contact__info{
     grid-template-columns: 300px;
     justify-content: center;
-    display: inline-flex;
+    display: flex;
   }
   .contact__form{
     width: 360px;
@@ -1113,6 +1119,17 @@ body.light-theme{
 
 @media screen and (min-width: 767px){
   .work__container{
+    grid-template-columns: repeat(2, max-content);
+  }
+  .contact__container{
+    grid-template-columns: repeat(1, max-content); /* 2 */
+    justify-content: center;
+    column-gap: 3rem;
+  }
+}
+
+@media screen and (min-width: 767px){
+  .w-container{
     grid-template-columns: repeat(2, max-content);
   }
   .contact__container{

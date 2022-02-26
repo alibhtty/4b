@@ -178,7 +178,7 @@ article {
 }
 
 article:nth-child(even) {
-  background: #111;
+  /* background: #111; */
   flex-direction: row-reverse;
 }
 
@@ -222,7 +222,7 @@ article:nth-child(odd) + footer {
 } */
 
 .article-content {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.85);
   font-weight: lighter;
   vertical-align: top;
   position: relative;
@@ -520,26 +520,33 @@ details .content {
     padding-top: 0;
   }
 
+  .article-image{
+    opacity: 60%;
+    transform: scale(1);
+    filter: blur(0px);
+    transition: all .6s ease-out;
+  }
+
 }
 
 
 
 /* BACKGROUND */
 .bg-9{
-  background-color: #111;
+  /*background-color: #111; */
   transition: .8s ease-in;
 }
 .bg-9:hover{
-  background-color: rgb(255, 195, 206, .2);
+  /* background-color: rgb(255, 195, 206, .2); */
   transition: 1s ease-out;
 }
 
 .bg-8{
-  background-color: #000;
+  /* background-color: #000; */
   transition: .8s ease-in;
 }
 .bg-8:hover{
-  background-color: #000;
-  background-color: rgb(255, 128, 0, .2);
+  /* background-color: #000; */
+  /* background-color: rgb(255, 128, 0, .2); */
   transition: 1s ease-out;
 }
