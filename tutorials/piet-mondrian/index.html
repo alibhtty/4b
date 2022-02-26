@@ -1,0 +1,609 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Piet Mondrian | Generative Artistry</title>
+
+    <meta charset="utf-8">
+    
+    <meta name="description" content="Piet Mondrians art is world renoun, there&#39;s also something about his style that makes it irresistable to try to replicate with code. Generative art tutorials, news and love.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/syntax-highlighting.css" rel="stylesheet">
+  </head>
+  <body class="tutorial">
+
+    <header>
+  <div class="wrapper">
+    <a class="logo" href="../../index.html">generative artistry</a>
+    <div class="links">
+      <a href="../index.html">tutorials</a> • <a href="../../episodes/index.html">podcast</a> • <a href="../../index.xml.rss">rss</a>
+    </div>
+  </div>
+</header>
+
+    <div class="tutorial-post">
+      
+      <div class="sidebar tutorial-sidebar">
+
+        <div id="tutorial-code" class="tutorial-code"></div>
+        
+        <div class="tutorial-send-code">
+          <span>➵</span>
+        </div>
+
+        <iframe class="tutorial-frame" src="../../utils/injectable-iframe.html" sandbox="allow-same-origin allow-scripts"></iframe>
+
+      </div>
+
+      <div class="tutorial-content">
+        
+
+<h1 id="piet-mondrian">Piet Mondrian</h1>
+
+<p>Replicating <a href="https://en.wikipedia.org/wiki/Piet_Mondrian">Piet Mondrian&rsquo;s</a> art with code is no easy task, in fact honestly I&rsquo;d say there&rsquo;s no real way of pinning down his creations entirely with code, they were hand made. That said, we can try to replicate something within the realm of what would have been one of Piet&rsquo;s works&hellip; so that&rsquo;s what we will do in this tutorial&hellip; and yes, we will add the color as well.</p>
+
+<p>As usual, here is our initial setup. Using <code>window.devicePixelRatio</code> to scale the canvas on retina screens, and setting our canvas size, with only a html <code>&lt;canvas&gt;</code> on the page.</p>
+
+<div class="tmd-trigger" data-from="0">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dpr</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">;</span>
+<span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">size</span> <span class="o">*</span> <span class="nx">dpr</span><span class="p">;</span>
+<span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">size</span> <span class="o">*</span> <span class="nx">dpr</span><span class="p">;</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">dpr</span><span class="p">,</span> <span class="nx">dpr</span><span class="p">);</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+</div>
+
+<p>Now, the approach I&rsquo;d like to take isn&rsquo;t perfect, but what I&rsquo;d like to do is start with a big square (the canvas) and then start to divide it up&hellip; we will pick a line, either horizontally or vertically and break any squares in that area&hellip; after that, we&rsquo;ll add some random to the splitting, so not all squares are split, which should give us something around the famous Mondrian look, albeit probably a little more mathematically rigid.</p>
+
+<p>We&rsquo;ll create an array of squares.</p>
+
+<div class="tmd-trigger" data-from="11">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">squares</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="nx">size</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="nx">size</span>
+  <span class="p">}];</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>And, as I like to do, we&rsquo;ll create our &ldquo;draw&rdquo; function and call it, so we can see what we&rsquo;re making.</p>
+
+<div class="tmd-trigger" data-from="20">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">squares</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">rect</span><span class="p">(</span>
+      <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">x</span><span class="p">,</span>
+      <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">y</span><span class="p">,</span>
+      <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">width</span><span class="p">,</span>
+      <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">height</span>
+    <span class="p">);</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">draw</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+</div>
+
+<p>This is looping through all of our squares (just one at the moment, and drawing it on the canvas).</p>
+
+<p>Now, we can create a function to find which squares should be split&hellip; and then the function to split the square in the direction we&rsquo;ve given.</p>
+
+<div class="tmd-trigger" data-from="18" data-to="19">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">splitSquaresWith</span><span class="p">(</span><span class="nx">coordinates</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Loops through the squares, and find if
+</span><span class="c1"></span>  <span class="c1">// one should be split
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">splitOnX</span><span class="p">(</span><span class="nx">square</span><span class="p">,</span> <span class="nx">splitAt</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// Create two new squares, based on
+</span><span class="c1">// splitting the given one at the
+</span><span class="c1">// x coordinate given
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">splitOnY</span><span class="p">(</span><span class="nx">square</span><span class="p">,</span> <span class="nx">splitAt</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// Create two new squares, based on
+</span><span class="c1">// splitting the given one at the
+</span><span class="c1">// y coordinate given
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="nx">splitSquaresWith</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="mi">160</span><span class="p">})</span>
+<span class="nx">splitSquaresWith</span><span class="p">({</span><span class="nx">y</span><span class="o">:</span> <span class="mi">160</span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+</div>
+
+<p>You can see at the bottom that I&rsquo;m also calling the split the squares on the <code>x</code> and <code>y</code>, both in the middle. If these work, we&rsquo;ll know we can do a lot more splitting. But for now, these will be great for testing.</p>
+
+<p>First, the <code>splitSquaresWith</code> function.</p>
+
+<div class="tmd-trigger" data-from="19" data-to="21" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">const</span> <span class="p">{</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">coordinates</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">squares</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">const</span> <span class="nx">square</span> <span class="o">=</span> <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">square</span><span class="p">.</span><span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">square</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">square</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">squares</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nx">splitOnX</span><span class="p">(</span><span class="nx">square</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">y</span> <span class="o">&amp;&amp;</span> <span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">square</span><span class="p">.</span><span class="nx">y</span> <span class="o">&amp;&amp;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">square</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">square</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">squares</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nx">splitOnY</span><span class="p">(</span><span class="nx">square</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+</div>
+
+<p>There&rsquo;s a bit going on here, including some cheeky little tricks.</p>
+
+<ul>
+<li><code>const { x, y } = coordinates</code> is extracting the <code>x</code> and <code>y</code> variables out of the object we&rsquo;re passing, eg <code>{x: 160}</code> or <code>{y: 160}</code></li>
+<li>We&rsquo;re looping backwards through the squares with <code>(var i = squares.length - 1; i &gt;= 0; i--)</code> this is because we&rsquo;re taking elements <strong>out</strong> of the loop (and replacing them with 2 squares), looping backwards means the order will stay the same, and the new items won&rsquo;t be split again.</li>
+</ul>
+
+<p>Of course, our single square has disappeared because we need to fill out the <code>splitOn</code> functions, these are going to look pretty similar.</p>
+
+<div class="tmd-trigger" data-from="37" data-to="40" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">squareA</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">x</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+  <span class="nx">y</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+  <span class="nx">width</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="p">(</span><span class="nx">square</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="nx">splitAt</span> <span class="o">+</span> <span class="nx">square</span><span class="p">.</span><span class="nx">x</span><span class="p">),</span>
+  <span class="nx">height</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">height</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">squareB</span> <span class="o">=</span> <span class="p">{</span>
+<span class="nx">x</span><span class="o">:</span> <span class="nx">splitAt</span><span class="p">,</span>
+<span class="nx">y</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+<span class="nx">width</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="nx">splitAt</span> <span class="o">+</span> <span class="nx">square</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+<span class="nx">height</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">height</span>
+<span class="p">};</span>
+
+<span class="nx">squares</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">squareA</span><span class="p">);</span>
+<span class="nx">squares</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">squareB</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+</div>
+
+<p>And&hellip;</p>
+
+<div class="tmd-trigger" data-from="56" data-to="59" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">squareA</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">x</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+  <span class="nx">y</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+  <span class="nx">width</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+  <span class="nx">height</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="p">(</span><span class="nx">square</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="nx">splitAt</span> <span class="o">+</span> <span class="nx">square</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">squareB</span> <span class="o">=</span> <span class="p">{</span>
+<span class="nx">x</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+<span class="nx">y</span><span class="o">:</span> <span class="nx">splitAt</span><span class="p">,</span>
+<span class="nx">width</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+<span class="nx">height</span><span class="o">:</span> <span class="nx">square</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="nx">splitAt</span> <span class="o">+</span> <span class="nx">square</span><span class="p">.</span><span class="nx">y</span>
+<span class="p">};</span>
+
+<span class="nx">squares</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">squareA</span><span class="p">);</span>
+<span class="nx">squares</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">squareB</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+</div>
+
+<p>These two functions are creating two squares, where the previous single square was, and then adding them back into our <code>squares</code> array. You can see by splitting in the two centers, we&rsquo;ve made a window.</p>
+
+<p>Instead of our two practice splits, we&rsquo;ll create a <code>step</code> variable, and split on that step over and over.</p>
+
+<div class="tmd-trigger" data-from="10" data-to="10">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">step</span> <span class="o">=</span> <span class="nx">size</span> <span class="err">/ 6;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>And then the loop.</p>
+
+<div class="tmd-trigger" data-from="75" data-to="77">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">splitSquaresWith</span><span class="p">({</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">i</span> <span class="p">});</span>
+  <span class="nx">splitSquaresWith</span><span class="p">({</span> <span class="nx">x</span><span class="o">:</span> <span class="nx">i</span> <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>Whew, that was a lot of set up&hellip; we can get into the <code>random</code> now. Rather than splitting each and every square when we hit it, we&rsquo;ll only split them half the time.</p>
+
+<div class="tmd-trigger" data-from="26" data-to="28" data-indent="3">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">squares</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="nx">splitOnX</span><span class="p">(</span><span class="nx">square</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>Ooh, looking good. And on the <code>y</code> axis too!</p>
+
+<div class="tmd-trigger" data-from="33" data-to="35" data-indent="3">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">squares</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="nx">splitOnY</span><span class="p">(</span><span class="nx">square</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>And there we have it, the shapes and structure we want! As always, with these tutorials you can hit the small arrow sitting between the editor and the demo and the code will rerun, if you press it a few times now, you&rsquo;ll see our Mondrian structure take a few different shapes.</p>
+
+<p>Let&rsquo;s add some color in. First the variables, using those beautiful red, blue and yellow colors.</p>
+
+<div class="tmd-trigger" data-from="11" data-to="11">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">white</span> <span class="o">=</span> <span class="s1">&#39;#F2F5F1&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#D40920&#39;</span><span class="p">,</span> <span class="s1">&#39;#1356A2&#39;</span><span class="p">,</span> <span class="s1">&#39;#F7D842&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>We&rsquo;ll pick three random squares, and give each of them a <code>color</code>. You might see only one or two colors, and that is because the same square was randomly selected twice.</p>
+
+<div class="tmd-trigger" data-from="87" data-to="87" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">squares</span><span class="p">[</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">squares</span><span class="p">.</span><span class="nx">length</span><span class="p">)].</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">colors</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>And of course, making sure the draw function colors them in.</p>
+
+<div class="tmd-trigger" data-from="98" data-to="98" data-indent="2">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">97
+</span><span class="lnt">98
+</span><span class="lnt">99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">color</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">white</span>
+<span class="p">}</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>Colors, beautiful! Again, if you don&rsquo;t see any, it should be a matter of hitting the arrow on the side a few times.</p>
+
+<p>You can see now as well, how simple it is to add or remove complexity based on the grid.</p>
+
+<div class="tmd-trigger" data-from="10" data-to="11">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">step</span> <span class="o">=</span> <span class="nx">size</span> <span class="err">/ 20;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<div class="tmd-trigger" data-from="10" data-to="11">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">step</span> <span class="o">=</span> <span class="nx">size</span> <span class="err">/ 4;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<div class="tmd-trigger" data-from="10" data-to="11">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">step</span> <span class="o">=</span> <span class="nx">size</span> <span class="err">/ 7;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>And there we have it, a Mondrian. Please, hit the link below to have a play on CodePen, play with the colors, how you apply them, play with the split percentages. It&rsquo;s all good fun!</p>
+
+        <form action="https://codepen.io/pen/define" method="POST" target="_blank">
+  <input type="hidden" name="data" value='{}'>
+  ↪ You can edit the code above, and have it run by pressing the arrow between the code and demo, but if you like, you can also play around a little with this code <input type="submit" id="codepen-prefil" value="on CodePen">
+</form>
+      </div>
+    </div>
+    
+    <footer>
+	<div class="wrapper">
+		<div class="links">
+			By <a href="https://ruthjohn.com/" target="_blank" rel="noopener noreferrer">ruth</a> &
+			<a href="https://tholman.com" target="_blank" rel="noopener noreferrer">tim</a> •
+			<a href="https://github.com/tholman/generative-artistry/">source</a>
+		</div>
+    <a href="https://www.buymeacoffee.com/tholman" target="_blank" class="coffee" rel="noopener noreferrer">☕</a>
+	</div>
+</footer>
+
+
+    <script src="../../js/tmd.js"></script>
+    <script src="../../js/codepen-prefil.js"></script>
+    <script src="../../js/favicon.js"></script>
+    <script src="../../js/libs/monaco-editor/min/vs/loader.js"></script>
+
+    <script>
+
+        require.config({ paths: { 'vs': '/js/libs/monaco-editor/min/vs' }});
+        var tmd, editor;
+
+        require(['vs/editor/editor.main'], function() {
+          editor = monaco.editor.create(document.querySelector('#tutorial-code'), {
+            value: [
+              '// Welcome to Tutorial Markdown.',
+              '// start scrolling, and we\'ll',
+              '// write the code.'
+            ].join('\n'),
+            lineNumbersMinChars: 2,
+            scrollBeyondLastLine: false,
+            language: 'javascript',
+            fontSize: 10,
+            minimap: { enabled: false },
+            hover: false,
+            occurrencesHighlight: false
+          })
+
+          editor.getModel().updateOptions({ tabSize: 2 })
+
+          tmd = new TutorialMarkdown({
+            editor: {
+              editor: editor,
+               api: monaco
+             },
+             iframe: document.querySelector('.tutorial-frame'),
+             markdownSelector: {
+               blockSelector: '.tmd-trigger', 
+               codeSelector: '.lntd:nth-child(2) .language-js' 
+             }
+          })
+        })
+
+        document.querySelector('.tutorial-send-code').addEventListener('click', function() {
+          tmd.sendCode()
+        })
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121043299-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121043299-1');
+</script>
+  </body>
+</html>
