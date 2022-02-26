@@ -91,7 +91,7 @@ body {
   background-color: var(--container-color); /* var(--container-color) */
   display: inline-block;
   vertical-align: top;
-  /* width: 300px; */
+  width: 300px;
   color: #eee;
   font-size: 30px;
   font-weight: 300;
