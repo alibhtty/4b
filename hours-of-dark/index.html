@@ -1,0 +1,354 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hours of Dark | Generative Artistry</title>
+
+    <meta charset="utf-8">
+    
+    <meta name="description" content="365 strokes representing the hours of darkness of each day. A recreation of the 2011 calendar by Accept &amp; Proceed. Generative art tutorials, news and love.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/syntax-highlighting.css" rel="stylesheet">
+  </head>
+  <body class="tutorial">
+
+    <header>
+  <div class="wrapper">
+    <a class="logo" href="../../index.html">generative artistry</a>
+    <div class="links">
+      <a href="../index.html">tutorials</a> • <a href="../../episodes/index.html">podcast</a> • <a href="../../index.xml.rss">rss</a>
+    </div>
+  </div>
+</header>
+
+    <div class="tutorial-post">
+      
+      <div class="sidebar tutorial-sidebar">
+
+        <div id="tutorial-code" class="tutorial-code"></div>
+        
+        <div class="tutorial-send-code">
+          <span>➵</span>
+        </div>
+
+        <iframe class="tutorial-frame" src="../../utils/injectable-iframe.html" sandbox="allow-same-origin allow-scripts"></iframe>
+
+      </div>
+
+      <div class="tutorial-content">
+        
+
+<h1 id="hours-of-dark">Hours of Dark</h1>
+
+<p class="tutorial-contributor">
+This post is from the talented <a href="https://brunoimbrizi.com/">brunoimbrizi</a>, if you're interested in posting, you can open up a <a href="https://github.com/tholman/generative-artistry/issues/31">proposal</a>, just like he did!
+</p>
+
+<p>In this tutorial, we are going to recreate the look of a print by Accept &amp; Proceed called <a href="https://acceptandproceed.com/shop/HOD11" target="_blank">Hours of Dark 2011</a>. All the strokes in the grid represent a day, their width proportional to the hours of darkness and their orientation defined by the angle of the sunset.</p>
+
+<p>Here is our initial setup with a single <code>&lt;canvas&gt;</code> element, using <code>window.devicePixelRatio</code> to scale it on retina screens.</p>
+
+<div class="tmd-trigger" data-from="0">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dpr</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">;</span>
+<span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">size</span> <span class="o">*</span> <span class="nx">dpr</span><span class="p">;</span>
+<span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">size</span> <span class="o">*</span> <span class="nx">dpr</span><span class="p">;</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">dpr</span><span class="p">,</span> <span class="nx">dpr</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>We need a few variables to describe the grid. First, the number of strokes which is the same as the number of days in a non-leap year. Then the number of columns and rows, just enough to pack 365 cells in the grid. In this case 23&times;16 = 368, so the last 3 cells will be blank.</p>
+
+<div class="tmd-trigger" data-from="10">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">cols</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">rows</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">days</span> <span class="o">=</span> <span class="mi">365</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>We also need variables to define the dimensions of the grid, which has a landscape aspect. And from that we can calculate the dimensions of each cell and the top and left margins.</p>
+
+<div class="tmd-trigger" data-from="14">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">gridw</span> <span class="o">=</span> <span class="nx">size</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">gridh</span> <span class="o">=</span> <span class="nx">size</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">cellw</span> <span class="o">=</span> <span class="nx">gridw</span> <span class="err">/ cols;</span>
+<span class="kd">var</span> <span class="nx">cellh</span> <span class="o">=</span> <span class="nx">gridh</span> <span class="err">/ rows;</span>
+<span class="kd">var</span> <span class="nx">margx</span> <span class="o">=</span> <span class="p">(</span><span class="nx">size</span> <span class="o">-</span> <span class="nx">gridw</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">margy</span> <span class="o">=</span> <span class="p">(</span><span class="nx">size</span> <span class="o">-</span> <span class="nx">gridh</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>Now we have enough to start drawing the strokes. We are going to loop over <code>days</code> column by column, so first, all the rows in the first column, then all the rows in the second column and so on.</p>
+
+<p><code>x</code> and <code>y</code> depend on the margins and on the cell dimensions. The width and height of each stroke (<code>w</code>, <code>h</code>) are arbitrary values which look right for the size of our canvas on the page. The rectangles are drawn from the centre, so this will be their anchor point when we rotate them later.</p>
+
+<div class="tmd-trigger" data-from="21">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">days</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">col</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">i</span> <span class="err">/ rows);</span>
+  <span class="kd">var</span> <span class="nx">row</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">%</span> <span class="nx">rows</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">margx</span> <span class="o">+</span> <span class="nx">col</span> <span class="o">*</span> <span class="nx">cellw</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">margy</span> <span class="o">+</span> <span class="nx">row</span> <span class="o">*</span> <span class="nx">cellh</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">w</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">h</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+  
+  <span class="nx">context</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+
+  <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">rect</span><span class="p">(</span><span class="nx">w</span> <span class="o">*</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">h</span> <span class="o">*</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">);</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">();</span>
+
+  <span class="nx">context</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>At this point, the grid is a bit offset to the left and to the top, and this is because <code>x</code> and <code>y</code> are the top-left of each cell. So we need one more call to <code>translate</code> to place the origin at the centre of the cell. These separate calls will come in handy later.</p>
+
+<div class="tmd-trigger" data-from="32" data-to="32" data-action="inject" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">cellw</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nx">cellh</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>Now we need to calculate the rotation. In the original calendar, the authors used data from the angle of the sunset (known as the Azimuth) to determine the orientation of the lines. Luckily for us, we can get pretty close with a sine curve, thanks to the smooth wobble of our planet.</p>
+
+<p>The trick here is to use two angles.</p>
+
+<p>The first one <code>phi</code> determines the range of rotation in a year, which is between 0 and &Pi;.</p>
+
+<p>The second one <code>theta</code> modulates the first one with a sine curve, so instead of rotating a full 180&deg;, it eases in and out of the first half of that angle and then eases back into 0&deg;.</p>
+
+<div class="tmd-trigger" data-from="34" data-to="34" data-action="inject" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">phi</span> <span class="o">=</span> <span class="p">(</span><span class="nx">i</span> <span class="err">/ days) * Math.PI;</span>
+<span class="kd">var</span> <span class="nx">theta</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">phi</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">;</span>
+
+<span class="nx">context</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">theta</span><span class="p">);</span>
+ 
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>To match the look, we need to nudge the inital angle. We also need to adjust the rotation range so it&rsquo;s a little bit less than 90&deg;.</p>
+
+<div class="tmd-trigger" data-from="35" data-to="36" data-action="replace" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">theta</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">phi</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="mf">0.45</span> <span class="o">+</span> <span class="mf">0.85</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>The thickness of the strokes is proportional to the hours of darkness in each day. Again, we can get away with a good approximation using a cosine curve.</p>
+
+<div class="tmd-trigger" data-from="39" data-to="39" data-action="inject" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">phi</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">scale</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+ 
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>The last step is to apply a clipping mask so each stroke is only drawn inside its cell. This is where our separate calls to <code>translate</code> come in handy, so we need to insert the next chunk of code in between those calls.</p>
+
+<div class="tmd-trigger" data-from="32" data-to="32" data-action="inject" data-indent="1">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"> 
+<span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cellw</span><span class="p">,</span> <span class="nx">cellh</span><span class="p">);</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">clip</span><span class="p">();</span>
+ 
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+
+<p>And there we have it! Simple and elegant. A beautiful piece of data visualisation from <a href="https://acceptandproceed.com/shop/HOD11" target="_blank">Accept &amp; Proceed</a> which we managed to recreate with some sine and cosine curves.</p>
+
+        <form action="https://codepen.io/pen/define" method="POST" target="_blank">
+  <input type="hidden" name="data" value='{}'>
+  ↪ You can edit the code above, and have it run by pressing the arrow between the code and demo, but if you like, you can also play around a little with this code <input type="submit" id="codepen-prefil" value="on CodePen">
+</form>
+      </div>
+    </div>
+    
+    <footer>
+	<div class="wrapper">
+		<div class="links">
+			By <a href="https://ruthjohn.com/" target="_blank" rel="noopener noreferrer">ruth</a> &
+			<a href="https://tholman.com" target="_blank" rel="noopener noreferrer">tim</a> •
+			<a href="https://github.com/tholman/generative-artistry/">source</a>
+		</div>
+    <a href="https://www.buymeacoffee.com/tholman" target="_blank" class="coffee" rel="noopener noreferrer">☕</a>
+	</div>
+</footer>
+
+
+    <script src="../../js/tmd.js"></script>
+    <script src="../../js/codepen-prefil.js"></script>
+    <script src="../../js/favicon.js"></script>
+    <script src="../../js/libs/monaco-editor/min/vs/loader.js"></script>
+
+    <script>
+
+        require.config({ paths: { 'vs': '/js/libs/monaco-editor/min/vs' }});
+        var tmd, editor;
+
+        require(['vs/editor/editor.main'], function() {
+          editor = monaco.editor.create(document.querySelector('#tutorial-code'), {
+            value: [
+              '// Welcome to Tutorial Markdown.',
+              '// start scrolling, and we\'ll',
+              '// write the code.'
+            ].join('\n'),
+            lineNumbersMinChars: 2,
+            scrollBeyondLastLine: false,
+            language: 'javascript',
+            fontSize: 10,
+            minimap: { enabled: false },
+            hover: false,
+            occurrencesHighlight: false
+          })
+
+          editor.getModel().updateOptions({ tabSize: 2 })
+
+          tmd = new TutorialMarkdown({
+            editor: {
+              editor: editor,
+               api: monaco
+             },
+             iframe: document.querySelector('.tutorial-frame'),
+             markdownSelector: {
+               blockSelector: '.tmd-trigger', 
+               codeSelector: '.lntd:nth-child(2) .language-js' 
+             }
+          })
+        })
+
+        document.querySelector('.tutorial-send-code').addEventListener('click', function() {
+          tmd.sendCode()
+        })
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121043299-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121043299-1');
+</script>
+  </body>
+</html>

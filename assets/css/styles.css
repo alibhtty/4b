@@ -768,7 +768,6 @@ body.light-theme{
   padding: 1rem;
   border-radius: .6rem;
   cursor: pointer;
-  transition: all .8s ease-in;
 }
 .work__card:hover img{
   filter: brightness(120%)contrast(110%);
