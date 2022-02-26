@@ -2,12 +2,14 @@
 
 <!DOCTYPE html>
 <html lang="en" >
+
 <head>
+
   <meta charset="UTF-8">
-  <title>The one</title>
+  <title>CodePen - gen22 // 01 - 10k</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100&amp;display=swap'>
-
+  
 <style>
 html {
   box-sizing: border-box;
@@ -20,9 +22,9 @@ html {
 }
 
 body {
-  /* display: flex; */
-  /* min-height: 100vh; */
-  /* padding: 1rem; */
+  display: flex;
+  min-height: 100vh;
+  padding: 1rem;
   align-items: center;
   justify-content: center;
   font-size: 16px;
@@ -82,27 +84,34 @@ h2 {
 
 shader-doodle {
   display: block;
-  width: calc(110vmin - 0rem);
-  height: 100vh;
-  /* height: calc(100vmin - 0rem); */
-  max-width: 100%;  /* 30rem */
-  max-height: 100vh; /* 30rem */
-}
-
-:host{
-  position: initial;
+  width: calc(100vmin - 2rem);
+  height: calc(100vmin - 2rem);
+  max-width: 30rem;
+  max-height: 30rem;
 }
 </style>
 
-</head>
+  <script>
+  window.console = window.console || function(t) {};
+</script>
 
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
 
 <body translate="no" >
   <a href="https://github.com/halvves/shader-doodle" target="_blank">
-  <!-- <div class="desc">
+  <div class="desc">
     <h1>01</h1>
     <h2>10k</h2>
-  </div> -->
+  </div>
   <shader-doodle>
     <script type="x-shader/x-fragment">
       float stroke(float x, float s, float w) {
@@ -150,6 +159,10 @@ shader-doodle {
 </a>
   
   <script src='https://unpkg.com/shader-doodle@1.0.0-alpha.20'></script>
+  
+  
+
 </body>
+
 </html>
  
