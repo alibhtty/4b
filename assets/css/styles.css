@@ -313,6 +313,7 @@ body.light-theme{
 /*=============== HOME ===============*/
 .home__container{
   position: fixed;
+  width: 100%;
   row-gap: 3.5rem; /* 4.5rem */
   padding-top: 2rem;
 }
@@ -576,7 +577,7 @@ body.light-theme{
   color: #252a32;
   border-radius: 4px;
   /* background: #ffffff; */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24); */
   transition: all .8s ease-in;
 }
 .mains .card-image {
@@ -617,10 +618,11 @@ body.light-theme{
 
 @media only screen and (min-width: 992px) {
   .mains .containers {
-    width: 1000px; /* 78% */
+    margin-left: 70%;
+    width: 600px; /* 78% */
     height: 30rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
   }
 }
