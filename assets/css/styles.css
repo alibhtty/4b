@@ -1507,9 +1507,9 @@ h2, h3, p {
   visibility: visible;
 }
 
-#btn-mas:checked~  .blur{
+/* #btn-mas:checked~  .blur{
   backdrop-filter: blur(5px);
-}
+} */
 
 .icon-mas2{
   cursor: pointer;
