@@ -29,6 +29,7 @@
         <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css'> -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <title>4B & Pr.</title>
+        <link rel="stylesheet" href="assets/css/locomotive-scroll.min.css">
 
         <!-- SESION STYLE's -->
         <style>
@@ -61,8 +62,8 @@
                     <div class="redes">
                         <a href="sesion/ariadna/" class="icon-facebook">PROYECTOS</a>
                         <a href="#" class="icon-facebook">GALERIA</a>
-                        <a href="#" class="icon-facebook">CONTACTO</a>
-                        <a href="#" class="icon-facebook">REDES</a>
+                        <a href="#" class="icon-facebook">MUSICA</a>
+                        <!-- <a href="#" class="icon-facebook">REDES</a> -->
                     </div>
                     <div class="btn-mas">
                         <label for="btn-mas" class="icon-mas2">MENU</label>
@@ -207,7 +208,7 @@
             </section> -->
 
             <!--=============== GALLERY ===============-->
-            <section class="gallery" id="galery" style="top: 30rem;">
+            <section class="gallery" id="galery">
               <!-- <span class="section__subtitle">Mis últimos trabajos en</span>
               <h2 class="section__title">Galería</h2> -->
   
@@ -554,7 +555,7 @@
             </section> -->
 
             <!--=============== CONTACT ===============-->
-            <section class="contact section" id="contact" style="margin-top: 160rem; margin-bottom: 8rem;">
+            <section class="contact section" id="contact">
                 <!-- <span class="section__subtitle">Redes Sociales y</span>
                 <h2 class="section__title">Contacto</h2> -->
 
@@ -699,5 +700,20 @@
             protect: true });
           //# sourceURL=pen.js
         </script>
-    </body>
+
+        <!--=============== LOCOMOTIVE SCROLL ===============-->
+        <script src="assets/js/locomotive-scroll.min.js"></script>
+        <script>
+          const virtualScrollSelector = '.main';
+          const locoScroll = new LocomotiveScroll({
+          	el: document.querySelector(virtualScrollSelector),
+          	smooth: true,
+          	tablet: {
+          		smooth: true,
+          	},
+          	smartphone: {
+          		smooth: true,
+          	}
+          });
+        </script>
 </html>
