@@ -51,8 +51,8 @@
 
     <body oncontextmenu="return false">
         <!--=============== HEADER ===============-->
-        <header class="header" id="header">
-            <nav class="nav container">
+        <header class="header" id="header" style="overflow: hidden;">
+              <nav class="nav container">
                 <a href="#" class="nav__logo">Prestige</a>
 
                 <div class="nav__menu container-menu">
@@ -632,6 +632,21 @@
             </div>
         </footer> -->
 
+        <!--=============== LOCOMOTIVE SCROLL ===============-->
+        <script src="assets/js/locomotive-scroll.min.js"></script>
+        <script>
+          const virtualScrollSelector = '.main';
+          const locoScroll = new LocomotiveScroll({
+            el: document.querySelector(virtualScrollSelector),
+            smooth: true,
+            tablet: {
+              smooth: true,
+            },
+            smartphone: {
+              smooth: true,
+            }
+          });
+        </script>
         <!--=============== SCROLLREVEAL ===============-->
         <script src="assets/js/scrollreveal.min.js"></script>
 
@@ -699,21 +714,5 @@
             loop: true,
             protect: true });
           //# sourceURL=pen.js
-        </script>
-
-        <!--=============== LOCOMOTIVE SCROLL ===============-->
-        <script src="assets/js/locomotive-scroll.min.js"></script>
-        <script>
-          const virtualScrollSelector = '.main';
-          const locoScroll = new LocomotiveScroll({
-          	el: document.querySelector(virtualScrollSelector),
-          	smooth: true,
-          	tablet: {
-          		smooth: true,
-          	},
-          	smartphone: {
-          		smooth: true,
-          	}
-          });
         </script>
 </html>

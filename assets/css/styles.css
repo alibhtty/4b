@@ -1431,12 +1431,19 @@ h2, h3, p {
   margin-bottom: 5rem;
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 576px) {
+  .contact{
+    margin-top: 140rem;
+  }
+} */
+
+@media screen and (max-width: 576px) {
   .gallery{
     top: 30rem;
+    margin-bottom: -4rem;
   }
   .contact{
-    margin-top: 260rem;
+    margin-top: 120rem;
     margin-bottom: 5rem;
   }
 }
@@ -1498,6 +1505,10 @@ h2, h3, p {
   margin-bottom: 10px;
   opacity: 1;
   visibility: visible;
+}
+
+#btn-mas:checked~  .blur{
+  backdrop-filter: blur(5px);
 }
 
 .icon-mas2{
