@@ -99,13 +99,13 @@ const selectedIcon = localStorage.getItem('selected-icon')
 
 // We obtain the current theme that the interface has by validating the light-theme class
 const getCurrentTheme = () => document.body.classList.contains(lightTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx bxs-invader' : 'bx bx-sun'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx bx-qr-scan' : 'bx bx-sun'
 
 // We validate if the user previously chose a topic
 if (selectedTheme) {
     //If the validation is fulfilled, we ask what the issue was to know if we activated o desactivated the light
     document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'] (lightTheme)
-    themeButton.classList[selectedIcon === 'bx bxs-invader' ? 'add' : 'remove'] (iconTheme)
+    themeButton.classList[selectedIcon === 'bx bx-qr-scan' ? 'add' : 'remove'] (iconTheme)
 }
 
 // Activate / desactivate the theme manually with the botton

@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="assets/css/proj.css">
         <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css'> -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <title>4B - Tecnology</title>
+        <title>4B & Pr.</title>
 
         <!-- SESION STYLE's -->
         <style>
@@ -52,10 +52,26 @@
         <!--=============== HEADER ===============-->
         <header class="header" id="header">
             <nav class="nav container">
-                <a href="#" class="nav__logo">Tecnology</a>
+                <a href="#" class="nav__logo">Prestige</a>
 
-                <div class="nav__menu">
-                    <ul class="nav__list">
+                <div class="nav__menu container-menu">
+
+
+                  <input type="checkbox" id="btn-mas">
+                    <div class="redes">
+                        <a href="sesion/ariadna/" class="icon-facebook">PROYECTOS</a>
+                        <a href="#" class="icon-facebook">GALERIA</a>
+                        <a href="#" class="icon-facebook">CONTACTO</a>
+                        <a href="#" class="icon-facebook">REDES</a>
+                    </div>
+                    <div class="btn-mas">
+                        <label for="btn-mas" class="icon-mas2">MENU</label>
+                    </div>
+
+                  <!-- <button>MENU</button> -->
+                  
+
+                    <!-- <ul class="nav__list">
                         <li class="nav__item">
                             <a href="#home" class="nav__link active-link">
                                 <i class='bx bx-home-alt'></i>
@@ -85,13 +101,28 @@
                                 <i class='bx bx-message-square-detail'></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
 
                 <!-- Theme change button -->
-                <i class='bx bxs-invader change-theme' id="theme-button"></i>
+                <i class='bx bx-qr-scan change-theme' id="theme-button"></i>
             </nav>
         </header>
+
+
+
+        <!-- <div class="container-menu">
+          <input type="checkbox" id="btn-mas">
+                    <div class="redes">
+                        <a href="#" class="icon-facebook">1</a>
+                        <a href="#" class="icon-facebook">2</a>
+                        <a href="#" class="icon-facebook">3</a>
+                        <a href="#" class="icon-facebook">4</a>
+                    </div>
+                    <div class="btn-mas">
+                        <label for="btn-mas" class="icon-mas2">MENU</label>
+                    </div>
+        </div> -->
 
         <!--=============== MAIN ===============-->
         <main class="main">
@@ -103,8 +134,10 @@
                     <div class="home__data">
                         <span class="home__greeting">     </span>
                         <h1 class="home__name">4B</h1>
-                        <h3 class="home__education">Tecnology</h3>
+                        <h3 class="home__education">Prestige</h3>
 
+                        <h1>Desliza mientras lee</h1>
+                        <p>Creador Digital Multidiciplinario</p>
                         <!-- <div class="home__buttons">
                             <a href="#galery" class="button button--ghost">Ver Galería</a>
                             <a href="#about" class="button">Sobre mi</a>
@@ -183,7 +216,7 @@
                     <div class="card">
                       <div class="card-image">
                         <a href="assets/img/galery01.jpg" data-fancybox="gallery" data-caption="Sesión Glamour by Ariana">
-                          <img src="assets/img/smar.png" alt="Image Gallery">
+                          
                         </a>
                       </div>
                     </div>
@@ -204,14 +237,14 @@
                     <div class="card">
                       <div class="card-image">
                         <a href="assets/img/galery02.jpg" data-fancybox="gallery" data-caption="Fotografía Restaurante El Ramblero">
-                          <img src="assets/img/galery0.jpg" alt="Image Gallery">
+                          
                         </a>
                       </div>
                     </div>
                     <div class="card">
                       <div class="card-image">
                         <a href="assets/img/galery03.jpg" data-fancybox="gallery" data-caption="Sun & Sky by Fernanda">
-                          <img src="assets/img/galery0.jpg" alt="Image Gallery">
+                          
                         </a>
                       </div>
                     </div>
@@ -232,7 +265,7 @@
                     <div class="card">
                       <div class="card-image">
                         <a href="assets/img/galery01.jpg" data-fancybox="gallery" data-caption="Sesión Glamour by Ariana">
-                          <img src="assets/img/smar.png" alt="Image Gallery">
+                          
                         </a>
                       </div>
                     </div>
@@ -521,13 +554,13 @@
             </section> -->
 
             <!--=============== CONTACT ===============-->
-            <!-- <section class="contact section" id="contact">
-                <span class="section__subtitle">Redes Sociales y</span>
-                <h2 class="section__title">Contacto</h2>
+            <section class="contact section" id="contact" style="margin-top: 160rem; margin-bottom: 8rem;">
+                <!-- <span class="section__subtitle">Redes Sociales y</span>
+                <h2 class="section__title">Contacto</h2> -->
 
                 <div class="contact__container container grid">
                     <div class="contact__Content">
-                        <-- <h3 class="contact__title">Social</h3> ->
+                        <!-- <h3 class="contact__title">Social</h3> -->
 
                         <div class="contact__info">
                             <div class="contact__card">
@@ -550,7 +583,7 @@
                                 </a>
                             </div>
 
-                            <-- <div class="contact__card">
+                            <!-- <div class="contact__card">
                                 <i class="bx bxl-messenger contact__card-icon"></i>
                                 <h3 class="contact__card-title">Messenger</h3>
                                 <span class="contact__card-data">4B.fb</span>
@@ -558,11 +591,11 @@
                                 <a href="https://m.me/daniela.peralvo.31" target="_blank" class="contact__button">
                                     Escribir <i class="bx bx-chevron-right contact__button-icon"></i>
                                 </a>
-                            </div> ->
+                            </div> -->
                         </div>
                     </div>
 
-                    <-- <div class="contact__content">
+                    <!-- <div class="contact__content">
                         <h3 class="contact__title">Comentame sobre tu proyecto</h3>
 
                         <form action="https://formspree.io/f/mbjwoqkn" method="POST" id="form" class="contact__form">
@@ -584,9 +617,9 @@
                             <button class="button">Enviar mensaje</button>
                         </form>
                         
-                    </div> ->
+                    </div> -->
                 </div>
-            </section>  -->
+            </section>
         </main>
 
         <!--=============== FOOTER ===============-->

@@ -273,7 +273,7 @@ body.light-theme{
   background-color: hsla(var(--second-hue), 32%, 16%, .8);
   width: 91%;
   border-radius: 1rem;
-  padding: 1rem 2.25rem;
+  /* padding: 1rem 2.25rem; */
   backdrop-filter: blur(10px);
   transition: .4s; /* For light mode animation */
 }
@@ -861,6 +861,11 @@ body.light-theme{
 }
 
 /*=============== CONTACT ===============*/
+/* .contact{
+  position: absolute;
+  margin-bottom: 1rem;
+} */
+
 .contact__container{
   row-gap: 3rem;
   padding-bottom: 0rem;
@@ -1420,3 +1425,58 @@ h2, h3, p {
   position: absolute;
 }
     
+
+
+
+/* BOTON MENU */
+#btn-mas{
+  display: none;
+}
+.container-menu{
+  position: fixed;
+  /* bottom: 20px;
+  right: 38%; */
+  z-index: 1;
+  /* right: 20px; */
+}
+
+.redes a, .icon-mas2{
+  display: block;
+  text-decoration: none;
+  /* background-color: #cc2b2b; */
+  columns: #eee;
+  width: 100%;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  border-radius: 10px;
+  transition: all 500ms ease;
+}
+
+.redes a:hover{
+  background-color: #fff;
+  color: #cc2b2b;
+}
+
+.redes a{
+  margin-bottom: -55px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#btn-mas:checked~ .redes a{
+  margin-bottom: 10px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.icon-mas2{
+  cursor: pointer;
+  /* background: #f44141; */
+  font-size: 23px;
+}
+
+#btn-mas:checked ~ .btn-mas .icon-mas2{
+  /* transform: rotate(137deg); */
+  font-size: 25px;
+}

@@ -1,0 +1,133 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<title>CodePen - Boton menu</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">  
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+
+<style>
+.dropdown-submenu { position: relative; }
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+.margen-top15{ margin-top:15px }
+</style>
+
+
+<style>
+    #btn-mas{
+        display: none;
+    }
+    .container-menu{
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .redes a, .icon-mas2{
+        display: block;
+        text-decoration: none;
+        background-color: #cc2b2b;
+        columns: #eee;
+        width: 355px;
+        height: 55px;
+        line-height: 55px;
+        text-align: center;
+        border-radius: 10px;
+        transition: all 500ms ease;
+    }
+
+    .redes a:hover{
+        background-color: #fff;
+        color: #cc2b2b;
+    }
+
+    .redes a{
+        margin-bottom: -15px;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    #btn-mas:checked~ .redes a{
+        margin-bottom: 10px;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .icon-mas2{
+        cursor: pointer;
+        background: #f44141;
+        font-size: 23px;
+    }
+
+    #btn-mas:checked ~ .btn-mas .icon-mas2{
+        /* transform: rotate(137deg); */
+        font-size: 25px;
+    }
+</style>
+
+</head>
+
+<body translate="no">
+
+    <!-- <div class="dropdown">
+        <a href="#" class="dropdown-togglet btn btn-primary" data-toggle="dropdown"> MENU </a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-submenu">
+            <a class="test" href="#"> Proyectos </a>
+          </li>
+
+          <li class="dropdown-submenu">
+            <a class="test" href="#"> Contacto </a>
+          </li>
+
+          <li class="dropdown-submenu">
+            <a class="test" href="#"> Galery </a>
+          </li>
+    </div> -->
+
+
+
+    <div class="container-menu">
+        <input type="checkbox" id="btn-mas">
+        <div class="redes">
+            <a href="#" class="icon-facebook">1</a>
+            <a href="#" class="icon-facebook">2</a>
+            <a href="#" class="icon-facebook">3</a>
+            <a href="#" class="icon-facebook">4</a>
+        </div>
+        <div class="btn-mas">
+            <label for="btn-mas" class="icon-mas2">MENU</label>
+        </div>
+    </div>
+
+
+<!-- <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script> -->
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script> -->
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+      <script id="rendered-js" >
+$(document).ready(function () {
+  $('.dropdown-submenu a.test').on("click", function (e) {
+    $(this).next('ul').css('display', 'block');
+    $(this).parent('li').siblings('li').children('ul').css('display', 'none');
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+//# sourceURL=pen.js
+    </script>
+
+</body>
+</html>
