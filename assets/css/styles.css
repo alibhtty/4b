@@ -1,8 +1,19 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
+<<<<<<< HEAD
+@font-face {
+  font-family: days;
+  src: url(../fonts/Days.otf);
+}
+
 /*=============== VARIABLES CSS ===============*/
 :root {
+  --texto: yellow;
+=======
+/*=============== VARIABLES CSS ===============*/
+:root {
+>>>>>>> e358a45e8bab515220a9cf37c33d6f022ea67399
   --header-height: 3.5rem;
 
   /*========== Colors ==========*/
@@ -258,8 +269,14 @@ body.light-theme{
 }
 
 .nav__logo{
+<<<<<<< HEAD
+  color: var(--texto); /* first color */
+  font-weight: var(--font-medium);
+  font-family: days;
+=======
   color: var(--first-color);
   font-weight: var(--font-medium);
+>>>>>>> e358a45e8bab515220a9cf37c33d6f022ea67399
   transition: .4s;
 }
 
@@ -1339,6 +1356,10 @@ body.light-theme{
     transition: all .6s ease-out;
   }
   .card:hover{
+<<<<<<< HEAD
+    transform: translateY(.90rem);
+    transition: all .3s ease-out;
+=======
     transform: translateY(.60rem);
     transform: scale(1.01);
     transition: all .6s ease-out;
@@ -1346,6 +1367,7 @@ body.light-theme{
 
   .parallax:hover{
     transform: translateY(.360rem);
+>>>>>>> e358a45e8bab515220a9cf37c33d6f022ea67399
   }
 }
 
