@@ -584,7 +584,7 @@ body.light-theme{
   position: relative;
   display: block;
   width: 100%;
-  padding-top: 70%;
+  padding-top: 200%;
   /* background: #ffffff; */
 }
 .mains .card-image img {
@@ -773,7 +773,7 @@ body.light-theme{
   cursor: pointer;
 }
 .work__card:hover img{
-  filter: brightness(120%)contrast(110%);
+  filter: brightness(105%)contrast(110%);
   transition: 1200ms;
 }
 
@@ -1277,7 +1277,7 @@ body.light-theme{
     padding: 0 2rem;
   }
   .card:hover{
-    filter: brightness(120%)contrast(120%);
+    filter: brightness(105%)contrast(120%);
     transition: 1.8s;
   }
 }
@@ -1339,8 +1339,13 @@ body.light-theme{
     transition: all .6s ease-out;
   }
   .card:hover{
-    transform: translateY(.20rem);
+    transform: translateY(.60rem);
+    transform: scale(1.01);
     transition: all .6s ease-out;
+  }
+
+  .parallax:hover{
+    transform: translateY(.360rem);
   }
 }
 
