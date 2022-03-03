@@ -36,17 +36,20 @@
         Pink: hsl(356, 66%, 75%)
         Teal: hsl(174, 63%, 62%)
   */
-  --first-hue: 207;
+  --first-hue: 207 /* 207 */;
   --sat: 90%;
   --lig: 72%;
-  --second-hue: 219;
+  --second-hue: 48; /* 219 */
   --first-color: hsl(var(--first-hue), var(--sat), var(--lig));
-  --first-color-alt: hsl(var(--first-hue), var(--sat), 68%); /* -4% */
+  --first-color-alt: hsl(var(--first-hue), var(--sat), 8%); /* -4% */
   --title-color: hsl(var(--second-hue), 15%, 95%);
   --text-color: hsl(var(--second-hue), 8%, 75%);
   --text-color-light: hsl(var(--second-hue), 4%, 55%);
-  --body-color: hsl(var(--second-hue), 48%, 6%); /* 8% */
+  /* --body-color: hsl(var(--second-hue), 48%, 6%);  *//* 8% */
   --container-color: hsl(var(--second-hue), 32%, 12%);
+
+
+  --body-color: #1b1b1b;
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
@@ -200,6 +203,10 @@ body.light-theme{
   color: var(--title-color);
 }
 
+.light-theme .icon-mas2{
+  color: #eee;
+}
+
 .light-theme .about__box{
   box-shadow: 0 2px 8px hsla(var(--second-hue), 48%, 8%, .1);
 }
@@ -238,6 +245,7 @@ body.light-theme{
 }
 
 .main {
+  margin-top: 0rem;
   overflow: hidden;
 }
 
@@ -336,6 +344,11 @@ body.light-theme{
 }
 
 /*=============== HOME ===============*/
+.intro {
+  width: 100%;
+  padding: 5rem 2rem;
+}
+
 .home__container{
   position: fixed;
   width: 100%;
@@ -374,13 +387,13 @@ body.light-theme{
 
 .home__handle{
   justify-self: center;
-  width: 190px;
-  height: 293px;
+  width: 10px;
+  height: 393px;
   background: linear-gradient(180deg,
               hsla(var(--first-hue), var(--sat), var(--lig), 1),
               hsla(var(--first-hue), var(--sat), var(--lig), .2)
               );
-  border-radius: 10rem 10rem 1rem 1rem;
+  border-radius: 10rem 10rem 10rem 10rem;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1189,14 +1202,25 @@ body.light-theme{
   }
 }
 
+
+.intro{
+  text-align: center;
+  position: fixed;
+}
+
 /* For large devices */
 @media screen and (min-width: 992px){
   .container{
     margin-left: auto;
     margin-right: auto;
   }
+  .intro{
+    /* position: fixed;
+    text-align: center; */
+    padding: 8rem 5rem;
+  }
   .section{
-    padding: 6.5rem 0 1rem;
+    /* padding: 6.5rem 0 1rem; */
   }
   .section__title{
     margin-bottom: 2.5rem;
@@ -1468,6 +1492,7 @@ h2, h3, p {
 
 /* PARALLAX */
 .gallery{
+  padding-top: 14rem;
   /* position: absolute; */
   top: 28rem;
 }
