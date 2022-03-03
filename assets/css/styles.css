@@ -6,6 +6,23 @@
   src: url(../fonts/Days.otf);
 }
 
+@font-face {
+  font-family: ubuntu-lt;
+  src: url(../fonts/Ubuntu-Light.ttf);
+}
+@font-face {
+  font-family: ubuntu-md;
+  src: url(../fonts/Ubuntu-Medium.ttf);
+}
+@font-face {
+  font-family: ubuntu-reg;
+  src: url(../fonts/Ubuntu-Regular.ttf);
+}
+@font-face {
+  font-family: ubuntu-bld;
+  src: url(../fonts/Ubuntu-Bold.ttf);
+}
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   --texto: yellow;
@@ -225,7 +242,7 @@ body.light-theme{
 }
 
 .section {
-  padding: 3.5rem 0 1rem;
+  padding: .5rem 0 1rem;
 }
 
 .section__title, 
@@ -278,7 +295,7 @@ body.light-theme{
   position: fixed;
   bottom: 1rem;
   /* background-color: hsla(var(--second-hue), 32%, 16%, .8); */
-  width: 91%;
+  width: 94%;
   border-radius: 1rem;
   /* padding: 1rem 2.25rem; */
   /* backdrop-filter: blur(10px); */
@@ -618,16 +635,20 @@ body.light-theme{
 @media only screen and (max-width: 576px) {
   .mains .containers {
     display: grid;
+    padding: 1rem 2rem;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 0rem;
+    grid-gap: 1rem;
+  }
+  .card{
+    padding-bottom: 2rem;
   }
 }
 
 @media only screen and (min-width: 992px) {
   .mains .containers {
-    margin-left: 70%;
-    width: 600px; /* 78% */
-    height: 30rem;
+    /* margin-left: 70%; */
+    width: 40%; /* 78% */
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
@@ -903,9 +924,9 @@ body.light-theme{
 }
 
 .contact__card-icon{
-  font-size: 2rem;
+  font-size: 1.4rem;
   color: var(--title-color);
-  margin-bottom: .25rem;
+  margin-bottom: -.1rem;
 }
 
 .contact__card-title,
@@ -920,13 +941,27 @@ body.light-theme{
 }
 
 .contact__button{
-  color: var(--first-color);
+  color: #eeeeee;
   text-transform: uppercase;
-  font-size: var(--small-font-size);
+  font-size: 18px;
+  font-family: ubuntu-bld;
   display: flex;
   align-items: center;
   justify-content: center;
   column-gap: .25rem;
+
+  width: 50%;
+  border-radius: .6rem;
+  min-width: 17.5rem;
+  background-color: hsla(var(--second-hue),32%, 15%, .8);
+  backdrop-filter: blur(10px);
+  height: 3.8rem;
+  transition: all .5s ease-in;
+}
+
+.contact__button:hover{
+  transform: translateY(.25rem);
+  transition: all .4s ease-out;
 }
 
 .contact__button:hover .contact__button-icon{
@@ -1082,7 +1117,7 @@ body.light-theme{
 /* For medium devices */
 @media screen and (min-width: 576px) {
   .nav__menu{
-    width: 96%; /* 328px */
+    width: 40%; /* 328px */
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -1430,11 +1465,11 @@ h2, h3, p {
 /* PARALLAX */
 .gallery{
   position: absolute;
-  top: 25rem;
+  top: 20rem;
 }
 
 .contact{
-  margin-top: 110rem;
+  /* margin-top: 110rem; */
   margin-bottom: 5rem;
 }
 
@@ -1450,18 +1485,19 @@ h2, h3, p {
     margin-bottom: -4rem;
   }
   .contact{
-    margin-top: 120rem;
-    margin-bottom: 5rem;
+    /* margin-top: 120rem; */
+    margin-bottom: 3.5rem;
   }
 }
 
 @media screen and (min-width: 992px){
   .gallery{
+    width: 100%;
     top: 30rem;
   }
   .contact{
-    margin-top: 160rem;
-    margin-bottom: 5rem;
+    /* margin-top: 160rem; */
+    margin-bottom: 3.5rem;
   }
 }
     
@@ -1486,6 +1522,7 @@ h2, h3, p {
   background-color: hsla(var(--second-hue), 32%, 16%, .8);
   backdrop-filter: blur(10px);
   /* background-color: #cc2b2b; */
+  font-family: ubuntu-bld;
   columns: #fff;
   width: 100%;
   height: 55px;
