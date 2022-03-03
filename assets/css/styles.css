@@ -232,7 +232,7 @@ body.light-theme{
 }
 
 .grid {
-  width: 90%;
+  width: 91%;
   display: grid;
   gap: 1.25rem;
 }
@@ -242,7 +242,7 @@ body.light-theme{
 }
 
 .section {
-  padding: .5rem 0 1rem;
+  padding: 1rem 0 1rem;
 }
 
 .section__title, 
@@ -282,7 +282,8 @@ body.light-theme{
 
 .nav__logo{
   color: var(--texto); /* first color */
-  font-weight: var(--font-medium);
+  /* font-weight: var(--font-medium); */
+  font-size: 18px;
   font-family: days;
   transition: .4s;
 }
@@ -635,7 +636,7 @@ body.light-theme{
 @media only screen and (max-width: 576px) {
   .mains .containers {
     display: grid;
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;
   }
@@ -952,7 +953,7 @@ body.light-theme{
 
   width: 50%;
   border-radius: .6rem;
-  min-width: 17.5rem;
+  /* min-width: 17.5rem; */
   background-color: hsla(var(--second-hue),32%, 15%, .8);
   backdrop-filter: blur(10px);
   height: 3.8rem;
@@ -1279,6 +1280,9 @@ body.light-theme{
     padding: .4rem;
     border-radius: .5rem;
   }
+  .contact__button{
+    min-width: 17.5rem;
+  }
 }
 
 /*=============== METADATOS GALERY  ===============*/
@@ -1464,8 +1468,8 @@ h2, h3, p {
 
 /* PARALLAX */
 .gallery{
-  position: absolute;
-  top: 20rem;
+  /* position: absolute; */
+  top: 28rem;
 }
 
 .contact{
@@ -1486,7 +1490,7 @@ h2, h3, p {
   }
   .contact{
     /* margin-top: 120rem; */
-    margin-bottom: 3.5rem;
+    margin-bottom: 7.5rem;
   }
 }
 
@@ -1529,8 +1533,13 @@ h2, h3, p {
   line-height: 55px;
   text-align: center;
   border-radius: 10px;
-  transition: all .2s ease-out;
-  
+  transition: all .2s ease-out; 
+}
+
+@media screen and (max-width:576px) {
+  .redes a, .icon-mas2{
+    width: 97%;
+  }
 }
 
 .redes a:hover{
