@@ -23,12 +23,15 @@
         <!--=============== CSS ===============-->
         <link rel="stylesheet" href="../../assets/css/styles.css">
         <link rel="stylesheet" href="../../assets/css/fancybox.min.css">
+        <link rel="stylesheet" href="assets/css/locomotive-scroll.min.css">
         <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css'> -->
 
-        <title>Ariadna - Sesión DP</title>
+        <title>Proyectos 4B</title>
 
         <!-- SESION STYLE's -->
         <style>
+          .gallery{padding-top: 0px;}
+          body{background-color: #0a0a0c;}
           .card{height: 100%;}
           .card-image{height: 100%;}
 
@@ -42,46 +45,66 @@
           .mains .card-image {
             padding-top: 0;
           }
+
+
+          @media only screen and (max-width: 576px) {
+            .mains .containers {
+              display: grid;
+              padding: 1rem 1rem;
+              grid-template-columns: repeat(1, 1fr);
+              grid-gap: 1rem;
+            }
+            .card{
+              padding-bottom: 2rem;
+            }
+          }
+          
+          @media only screen and (min-width: 992px) {
+            .mains .containers {
+              /* margin-left: 70%; */
+              width: 80%; /* 78% */
+              height: 100%;
+              display: grid;
+              grid-template-columns: repeat(1, 1fr);
+              grid-gap: 2rem;
+            }
+          }
+
+
+          @media screen and (min-width: 992px){
+  .metadata{
+    padding: 0 2rem;
+  }
+  .card:hover{
+    filter: brightness(105%)contrast(98%);
+    transition: .4s;
+  }
+}
         </style>
     </head>
     <body>
         <!--=============== HEADER ===============-->
         <header class="header" id="header">
             <nav class="nav container">
-                <a href="../../index.html" class="nav__logo">Inicio</a>
+                <a href="../../index.html" class="nav__logo">4B <span style="color: #333;">PRESTIGE</span> </a>
 
-                <div class="nav__menu">
-                    <ul class="nav__list">
-                        <li class="nav__item">
-                            <a href="../../index.html#home" class="nav__link"> <!-- active-link -->
-                                <i class='bx bx-home-alt'></i>
-                            </a>
-                        </li>
+                <div class="nav__menu container">
+                    
+                  <div class="nav__menu container-menu">
 
-                        <li class="nav__item">
-                            <a href="../../index.html#about" class="nav__link">
-                                <i class='bx bx-user'></i>
-                            </a>
-                        </li>
 
-                        <li class="nav__item">
-                            <a href="../../index.html#galery" class="nav__link">
-                                <i class='bx bx-photo-album'></i>
-                            </a>
-                        </li>
+                    <input type="checkbox" id="btn-mas">
+                      <div class="redes">
+                          <a href="sesion/ariadna/" class="icon-facebook">PROYECTOS</a>
+                          <a href="sesion/ariadna/" class="icon-facebook">GALERIA</a>
+                          <a href="sesion/ariadna/" class="icon-facebook">MUSICA</a>
+                          <!-- <a href="#" class="icon-facebook">REDES</a> -->
+                      </div>
+                      <div class="btn-mas">
+                          <label for="btn-mas" class="icon-mas2">MENU</label>
+                      </div>
+                  </div>
 
-                        <li class="nav__item">
-                            <a href="../../index.html#work" class="nav__link">
-                                <i class='bx bx-briefcase-alt-2'></i>
-                            </a>
-                        </li>
-
-                        <li class="nav__item">
-                            <a href="../../index.html#contact" class="nav__link">
-                                <i class='bx bx-message-square-detail'></i>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
 
                 <!-- Theme change button -->
@@ -97,64 +120,22 @@
 
             <!--=============== GALLERY ===============-->
             <section class="gallery section" id="galery">
-              <span class="section__subtitle">25 NOV 2021</span>
-              <h2 class="section__title">Ariadna Season</h2>
+              <span class="section__subtitle">02 ENE 2022</span>
+              <h2 class="section__title">El Changarrito</h2>
   
               <main class="mains">
                   <div class="containers">
                     <div class="card">
                       <div class="card-image">
-                        <a href="../../assets/img/sesion/ariadna/DSC04781.jpg" data-fancybox="gallery" data-caption="Sesión Glamour by Ariana">
-                          <img src="../../assets/img/sesion/ariadna/DSC04781-min.jpg" alt="Image Gallery">
+                        <a href="../../assets/img/v1.1.jpg" data-fancybox="gallery" data-caption="Sesión Glamour by Ariana">
+                          <img src="../../assets/img/v1.1.jpg" alt="Image Gallery">
                         </a>
                       </div>
                     </div>
                     <div class="card">
                       <div class="card-image">
-                        <a href="../../assets/img/sesion/ariadna/DSC04651.jpg" data-fancybox="gallery" data-caption="Fotografía Restaurante El Ramblero">
-                          <img src="../../assets/img/sesion/ariadna/DSC04651-min.jpg" alt="Image Gallery">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-image">
-                        <a href="../../assets/img/sesion/ariadna/DSC04800.jpg" data-fancybox="gallery" data-caption="Sun & Sky by Fernanda">
-                          <img src="../../assets/img/sesion/ariadna/DSC04800-min.jpg" alt="Image Gallery">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-image">
-                        <a href="../../assets/img/sesion/ariadna/DSC048281.jpg" data-fancybox="gallery" data-caption="FORUM Barcelona">
-                          <img src="../../assets/img/sesion/ariadna/DSC048281-min.jpg" alt="Image Gallery">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-image">
-                        <a href="../../assets/img/sesion/ariadna/DSC04647.jpg" data-fancybox="gallery" data-caption="Caption Images 1">
-                          <img src="../../assets/img/sesion/ariadna/DSC04647-min.jpg" alt="Image Gallery">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-image">
-                        <a href="../../assets/img/sesion/ariadna/DSC04836.jpg" data-fancybox="gallery" data-caption="Caption Images 1">
-                          <img src="../../assets/img/sesion/ariadna/DSC04836-min.jpg" alt="Image Gallery">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                      <div class="card-image">
-                        <a href="../../assets/img/sesion/ariadna/DSC04798.jpg" data-fancybox="gallery" data-caption="Caption Images 1">
-                          <img src="../../assets/img/sesion/ariadna/DSC04798-min.jpg" alt="Image Gallery">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-image">
-                        <a href="../../assets/img/sesion/ariadna/DSC048161.jpg" data-fancybox="gallery" data-caption="Caption Images 1">
-                          <img src="../../assets/img/sesion/ariadna/DSC048161-min.jpg" alt="Image Gallery">
+                        <a href="../../assets/img/v2.1.jpg" data-fancybox="gallery" data-caption="Fotografía Restaurante El Ramblero">
+                          <img src="../../assets/img/v2.1.jpg" alt="Image Gallery">
                         </a>
                       </div>
                     </div>
@@ -165,29 +146,29 @@
             <!--=============== METADATA ===============-->
             <div class="metadata containers">
               <div class="meta-sub">
-                <h1 class="meta-title">Modelo: </h1>
-                <p class="meta-p">Ariadna</p>
+                <h1 class="meta-title">Marca: </h1>
+                <p class="meta-p">El Changarrito</p>
               </div>
 
               <div class="meta-sub">
                 <h1 class="meta-title">Fecha: </h1>
-                <p class="meta-p">06 NOV 2021</p>
+                <p class="meta-p">02 ENE 2022</p>
               </div>
 
               <div class="meta-sub">
                 <h1 class="meta-title">Tags: </h1>
                 <ul class="meta-tag">
                   <li>
-                      <div class="meta-tag-list"><a href="../../index.html#galery" class="meta-tag-item">#sesión</a></div>
+                      <div class="meta-tag-list"><a href="../../index.html#galery" class="meta-tag-item">#restaurante</a></div>
                   </li>
                   <li>
-                      <div class="meta-tag-list"><a href="../../index.html#galery" class="meta-tag-item">#pink</a></div>
+                      <div class="meta-tag-list"><a href="../../index.html#galery" class="meta-tag-item">#magenta</a></div>
                   </li>
                   <li>
-                      <div class="meta-tag-list"><a href="../../index.html#galery" class="meta-tag-item">#hotelw</a></div>
+                      <div class="meta-tag-list"><a href="../../index.html#galery" class="meta-tag-item">#web</a></div>
                   </li>
                   <li>
-                      <div class="meta-tag-list"><a href="../../index.html#galery" class="meta-tag-item">#model</a></div>
+                      <div class="meta-tag-list"><a href="../../index.html#galery" class="meta-tag-item">#mexico</a></div>
                   </li>
                 </ul>
                 <!-- <p class="meta-p">#barcelona #urban <br> #paisaje</p> -->
@@ -232,7 +213,7 @@
         </main>
 
         <!--=============== FOOTER ===============-->
-        <footer class="footer">
+        <!-- <footer class="footer">
             <div class="footer__container container">
 
                 <ul class="footer__social">
@@ -251,7 +232,22 @@
                   &#169 <a target="_blank" href="https://ali-bhtty.web.app/">4B</a>. All rights reserved
                 </span>
             </div>
-        </footer>
+        </footer> -->
+
+        <script src="assets/js/locomotive-scroll.min.js"></script>
+        <script>
+          const virtualScrollSelector = '.main';
+          const locoScroll = new LocomotiveScroll({
+            el: document.querySelector(virtualScrollSelector),
+            smooth: true,
+            tablet: {
+              smooth: true,
+            },
+            smartphone: {
+              smooth: true,
+            }
+          });
+        </script>
 
         <!--=============== SCROLLREVEAL ===============-->
         <script src="../../assets/js/scrollreveal.min.js"></script>
