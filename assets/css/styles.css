@@ -26,6 +26,7 @@
 /*=============== VARIABLES CSS ===============*/
 :root {
   --texto: yellow;
+  --second-hue: red;
   --header-height: 3.5rem;
 
   /*========== Colors ==========*/
@@ -49,7 +50,7 @@
   --container-color: hsl(var(--second-hue), 32%, 12%);
 
 
-  --body-color: #1b1b1b;
+  --body-color: #000; /* 1b1b1b */
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
@@ -1600,7 +1601,39 @@ h2, h3, p {
   font-size: 23px;
 }
 
-#btn-mas:checked ~ .btn-mas .icon-mas2{
-  /* transform: rotate(137deg); */
+/* #btn-mas:checked ~ .btn-mas .icon-mas2{
   font-size: 25px;
+}
+ */
+#btn-mas:checked ~ .main{
+  /* transform: rotate(137deg); */
+  font-size: 55px;
+  backdrop-filter: blur(10px);
+}
+
+.bluring{
+  width: 4rem;
+  padding: 0rem 15%;
+  margin: 0 35%;
+  height: 10rem;
+  margin-top: -2rem;
+  border-radius: 50%;
+  filter: blur(90px);
+  background-color: rgb(9, 13, 231);
+}
+
+
+.intro h2{
+  transition: 2s ease-out;
+  transition-delay: 2s;
+}
+
+.intro h1{
+  transition: 1s ease-out;
+  transition-delay: 4s;
+}
+
+.intro p{
+  transition: 2s ease-out;
+  transition-delay: 4.5s;
 }

@@ -19,13 +19,13 @@
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
         <!--=============== SWIPER CSS ===============-->
-        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+        <!-- <link rel="stylesheet" href="assets/css/swiper-bundle.min.css"> -->
 
         <!--=============== CSS ===============-->
         <link rel="stylesheet" href="assets/css/styles.css">
         <link rel="stylesheet" href="assets/css/fancybox.min.css">
-        <link rel="stylesheet" href="assets/css/precios.css">
-        <link rel="stylesheet" href="assets/css/proj.css">
+        <!-- <link rel="stylesheet" href="assets/css/precios.css"> -->
+        <!-- <link rel="stylesheet" href="assets/css/proj.css"> -->
         <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css'> -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <title>4B & Co.</title>
@@ -49,11 +49,11 @@
           </style>
     </head>
 
-    <body oncontextmenu="return false">
+    <body class="body" oncontextmenu="return false">
         <!--=============== HEADER ===============-->
         <header class="header" id="header" style="overflow: hidden;">
               <nav class="nav container">
-                <a href="#" class="nav__logo">4B <span style="color: #333 ;">PRESTIGE</span> </a>
+                <a href="#" class="nav__logo">4B <span style="color: #444 ;">PRESTIGE</span> </a>
 
                 <div class="nav__menu container-menu">
 
@@ -76,11 +76,14 @@
         </header>
 
 
+        <section class="home">
         <div class="intro">
-          <h2 class="">ok, bienvenido</h2>
-                        <h1>estamos desarrollando</h1>
-                        <p>algunas cosas por aquí</p>
+          <h2>ok, bienvenido</h2>
+          <h1>estamos desarrollando</h1>
+          <p>algunas cosas por aquí</p>
+          <div class="bluring"></div>
         </div>
+        </section>
 
         <!-- <div class="container-menu">
           <input type="checkbox" id="btn-mas">
@@ -245,10 +248,10 @@
         <!--=============== LOCOMOTIVE SCROLL ===============-->
         <script src="assets/js/locomotive-scroll.min.js"></script>
         <script>
-          const virtualScrollSelector = '.main';
+          const virtualScrollSelector = '.gallery';
           const locoScroll = new LocomotiveScroll({
             el: document.querySelector(virtualScrollSelector),
-            smooth: true,
+            smooth: false,
             tablet: {
               smooth: true,
             },
