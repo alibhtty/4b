@@ -3,33 +3,33 @@
 
 @font-face {
   font-family: days;
-  src: url(../fonts/Days.otf);
+  src: url(https://alibhtty.github.io/id/assets/fonts/Days.otf);
 }
 
 @font-face {
   font-family: ubuntu-lt;
-  src: url(../fonts/Ubuntu-Light.ttf);
+  src: url(https://alibhtty.github.io/id/assets/fonts/Ubuntu-Light.ttf);
 }
 @font-face {
   font-family: ubuntu-md;
-  src: url(../fonts/Ubuntu-Medium.ttf);
+  src: url(https://alibhtty.github.io/id/assets/fonts/Ubuntu-Medium.ttf);
 }
 @font-face {
   font-family: ubuntu-reg;
-  src: url(../fonts/Ubuntu-Regular.ttf);
+  src: url(https://alibhtty.github.io/id/assets/fonts/Ubuntu-Regular.ttf);
 }
 @font-face {
   font-family: ubuntu-bld;
-  src: url(../fonts/Ubuntu-Bold.ttf);
+  src: url(https://alibhtty.github.io/id/assets/fonts/Ubuntu-Bold.ttf);
 }
 
 @font-face {
   font-family: interstate-lt;
-  src: url(../fonts/Interstate-mono-lt.otf);
+  src: url(https://alibhtty.github.io/id/assets/fonts/Interstate-mono-lt.otf);
 }
 @font-face {
   font-family: interstate;
-  src: url(../fonts/Interstate-mono.otf);
+  src: url(https://alibhtty.github.io/id/assets/fonts/Interstate-mono.otf);
 }
 
 /*=============== VARIABLES CSS ===============*/
