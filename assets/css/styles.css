@@ -1624,16 +1624,17 @@ h2, h3, p {
 
 
 .intro h2{
-  transition: 2s ease-out;
-  transition-delay: 2s;
+  transition: 1s ease-out;
+  transition-delay: 2.2s;
+  /* filter: blur(8px); */
 }
 
 .intro h1{
-  transition: 1s ease-out;
+  transition: .7s ease-out;
   transition-delay: 4s;
 }
 
 .intro p{
-  transition: 2s ease-out;
-  transition-delay: 4.5s;
+  transition: 1s ease-out;
+  transition-delay: 4.2s;
 }
