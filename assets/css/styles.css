@@ -25,7 +25,7 @@
 
 /*=============== VARIABLES CSS ===============*/
 :root {
-  --texto: yellow;
+  --texto: #BEF500;
   --second-hue: red;
   --header-height: 3.5rem;
 
@@ -205,7 +205,7 @@ body.light-theme{
 }
 
 .light-theme .icon-mas2{
-  color: #eee;
+  color: #222;
 }
 
 .light-theme .about__box{
@@ -940,7 +940,8 @@ body.light-theme{
 
 .contact__card-icon{
   font-size: 1.4rem;
-  color: var(--title-color);
+  color: #222;
+  /* color: var(--title-color); */
   margin-bottom: -.1rem;
 }
 
@@ -956,7 +957,7 @@ body.light-theme{
 }
 
 .contact__button{
-  color: #eeeeee;
+  color: #222;
   text-transform: uppercase;
   font-size: 18px;
   font-family: ubuntu-bld;
@@ -968,8 +969,9 @@ body.light-theme{
   width: 50%;
   border-radius: .6rem;
   /* min-width: 17.5rem; */
-  background-color: hsla(var(--second-hue),32%, 15%, .8);
-  backdrop-filter: blur(10px);
+  background-color: #BEF500;
+  /* background-color: hsla(var(--second-hue),32%, 15%, .8);
+  backdrop-filter: blur(10px); */
   height: 3.8rem;
   transition: all .5s ease-in;
 }
@@ -1538,6 +1540,10 @@ h2, h3, p {
 /* BOTON MENU */
 #btn-mas{
   display: none;
+  color: #222;
+}
+.icon-mas2{
+  color: #222;
 }
 .container-menu{
   position: fixed;
@@ -1548,15 +1554,15 @@ h2, h3, p {
 }
 
 .container-menu a{
-  color: #eee;
+  color: #222;
 }
 
 .redes a, .icon-mas2{
   display: block;
   text-decoration: none;
-  background-color: hsla(var(--second-hue), 32%, 16%, .8);
-  backdrop-filter: blur(10px);
-  /* background-color: #cc2b2b; */
+  /* background-color: hsla(var(--second-hue), 32%, 16%, .8); */
+  /* backdrop-filter: blur(10px); */
+  background-color: #BEF500;
   font-family: ubuntu-bld;
   columns: #fff;
   width: 100%;
@@ -1574,8 +1580,8 @@ h2, h3, p {
 }
 
 .redes a:hover{
-  background-color: #fff;
-  color: #000;
+  background-color: #D2FF9C;
+  color: #222;
   transition: all .2s ease-in;
 }
 
@@ -1619,7 +1625,7 @@ h2, h3, p {
   margin-top: -2rem;
   border-radius: 50%;
   filter: blur(90px);
-  background-color: rgb(9, 13, 231);
+  background-color: rgb(9, 13, 231); /*  */
 }
 
 
