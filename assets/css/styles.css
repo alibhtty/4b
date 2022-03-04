@@ -23,6 +23,15 @@
   src: url(../fonts/Ubuntu-Bold.ttf);
 }
 
+@font-face {
+  font-family: interstate-lt;
+  src: url(../fonts/Interstate-mono-lt.otf);
+}
+@font-face {
+  font-family: interstate;
+  src: url(../fonts/Interstate-mono.otf);
+}
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   --texto: #BEF500;
@@ -1207,7 +1216,7 @@ body.light-theme{
 
 
 .intro{
-  text-align: center;
+  /* text-align: center; */
   position: fixed;
 }
 
@@ -1218,12 +1227,10 @@ body.light-theme{
     margin-right: auto;
   }
   .intro{
+    /* left: 24rem; */
     /* position: fixed;
     text-align: center; */
-    padding: 8rem 5rem;
-  }
-  .section{
-    /* padding: 6.5rem 0 1rem; */
+    padding: 8rem 28rem;
   }
   .section__title{
     margin-bottom: 2.5rem;
@@ -1496,9 +1503,9 @@ h2, h3, p {
 
 /* PARALLAX */
 .gallery{
-  padding-top: 14rem;
+  padding-top: 11rem;
   /* position: absolute; */
-  top: 28rem;
+  /* top: 28rem; */
 }
 
 .contact{
@@ -1624,8 +1631,8 @@ h2, h3, p {
   height: 10rem;
   margin-top: -2rem;
   border-radius: 50%;
-  filter: blur(90px);
-  background-color: rgb(9, 13, 231); /*  */
+  filter: blur(100px);
+  background-color: #54611d ; /* rgb(9, 13, 231) */
 }
 
 
