@@ -46,7 +46,7 @@
         Pink: hsl(356, 66%, 75%)
         Teal: hsl(174, 63%, 62%)
   */
-  --first-hue: 207 /* 207 */;
+  --first-hue: 90 /* 207 */;
   --sat: 90%;
   --lig: 72%;
   --second-hue: 48; /* 219 */
@@ -161,7 +161,7 @@ img {
 body.light-theme{
   --title-color: hsl(var(--second-hue), 15%, 15%);
   --text-color: hsl(var(--second-hue), 8%, 35%);
-  --body-color: hsl(var(--second-hue), 100%, 97%); /* 100%, 99% */
+  --body-color: #959b66; /* hsl(var(--second-hue), 100%, 97%) */   /* 100%, 99% */
   --container-color: #fff;
 }
 
@@ -636,7 +636,7 @@ body.light-theme{
   /* background: #ffffff; */
 }
 .mains .card-image img {
-  border-radius: 4px;
+  border-radius: 10px;
   display: block;
   position: absolute;
   top: 0;
@@ -1632,7 +1632,7 @@ h2, h3, p {
   margin-top: -2rem;
   border-radius: 50%;
   filter: blur(100px);
-  background-color: #54611d ; /* rgb(9, 13, 231) */
+  background-color: #7b940c ; /* rgb(9, 13, 231) */
 }
 
 
