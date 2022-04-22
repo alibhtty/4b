@@ -180,7 +180,7 @@ body.light-theme{
 }
 
 .light-theme .nav__menu{
-  background-color: hsla(var(--second-hue), 32%, 90%, .8);
+  /* background-color: hsla(var(--second-hue), 32%, 90%, .8); */
 }
 
 .light-theme .section__subtitle{
@@ -314,7 +314,7 @@ body.light-theme{
   position: fixed;
   bottom: 1rem;
   /* background-color: hsla(var(--second-hue), 32%, 16%, .8); */
-  width: 94%;
+  width: 92%;
   border-radius: 1rem;
   /* padding: 1rem 2.25rem; */
   /* backdrop-filter: blur(10px); */
@@ -609,6 +609,13 @@ body.light-theme{
 
 .containers {
   max-width: 80rem;
+  width: 100%;
+  padding: 1rem 1rem;
+  margin: 0 auto;
+}
+
+.containers-mac {
+  max-width: 42rem;
   width: 100%;
   padding: 1rem 1rem;
   margin: 0 auto;
@@ -968,7 +975,7 @@ body.light-theme{
 .contact__button{
   color: #222;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 16px;
   font-family: ubuntu-bld;
   display: flex;
   align-items: center;
@@ -981,7 +988,7 @@ body.light-theme{
   background-color: #BEF500;
   /* background-color: hsla(var(--second-hue),32%, 15%, .8);
   backdrop-filter: blur(10px); */
-  height: 3.8rem;
+  height: 3.4rem;
   transition: all .5s ease-in;
 }
 
@@ -1526,7 +1533,7 @@ h2, h3, p {
   }
   .contact{
     /* margin-top: 120rem; */
-    margin-bottom: 7.5rem;
+    margin-bottom: 7rem;
   }
 }
 
@@ -1582,7 +1589,7 @@ h2, h3, p {
 
 @media screen and (max-width:576px) {
   .redes a, .icon-mas2{
-    width: 97%;
+    width: 100%;
   }
 }
 
